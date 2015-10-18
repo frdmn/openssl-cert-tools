@@ -15,7 +15,7 @@
  */
 
 [
-	require('./information')
+	require('./lib/information')
 ].forEach(function (module) {
 	Object.keys(module).forEach(function (key) {
 		exports[key] = module[key];
