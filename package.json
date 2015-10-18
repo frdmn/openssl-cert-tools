@@ -1,0 +1,19 @@
+{
+  "name": "openssl-cert-tools",
+  "version": "1.0.0",
+  "description": "Module to handle certificate related OpenSSL commands",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frdmn/openssl-cert-tools.git"
+  },
+  "author": "Jonas Friedmann <j@frd.mn>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frdmn/openssl-cert-tools/issues"
+  },
+  "homepage": "https://github.com/frdmn/openssl-cert-tools#readme"
+}
