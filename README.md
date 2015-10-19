@@ -135,10 +135,6 @@ opensslTools.getCertificateRequestInfo(demoCertificate, function(err, data){
 
 * NodeJS
 
-## Version
-
-1.0.0
-
 ## Credits
 
 * @[es128](https://github.com/es128/) for the [ssl-utils](https://github.com/es128/ssl-utils/) Node module:  
