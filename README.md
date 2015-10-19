@@ -1,4 +1,6 @@
-# openssl-cert-tools (WIP)
+# openssl-cert-tools
+
+[![Current tag](http://img.shields.io/github/tag/frdmn/openssl-cert-tools.svg)](https://github.com/frdmn/openssl-cert-tools/tags) [![Repository issues](http://issuestats.com/github/frdmn/openssl-cert-tools/badge/issue)](http://issuestats.com/github/frdmn/openssl-cert-tools) [![Build Status](https://travis-ci.org/frdmn/openssl-cert-tools.svg?branch=master)](https://travis-ci.org/frdmn/openssl-cert-tools)
 
 NodeJS module to handle TLS certificates using OpenSSL.
 
