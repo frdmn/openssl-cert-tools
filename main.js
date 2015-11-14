@@ -9,9 +9,8 @@
  *  \___/| .__/ \___|_| |_|___/___/_|      \__\___/ \___/|_|___/
  *       |_|
  *
- * Copyright (c) 2015 by Jonas Friedmann. This source is
- * subject to the Microsoft Permissive License. Please see
- * the LICENSE file for more information. All Rights Reserved.
+ * Copyright (c) 2015 by Jonas Friedmann. Please see the
+ * LICENSE file for more information. All Rights Reserved.
  */
 
 [
