@@ -14,6 +14,7 @@
  */
 
 [
+	require('./lib/certificate'),
 	require('./lib/information')
 ].forEach(function (module) {
 	Object.keys(module).forEach(function (key) {
