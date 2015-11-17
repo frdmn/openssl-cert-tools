@@ -121,6 +121,50 @@ opensslTools.getCertificateRequestInfo(demoCertificate, function(err, data){
      */
   }
 });
+
+test.getCertificate('frd.mn', '443', function(err, crt){
+  if (!err) {
+    console.log(crt);
+    /* =>
+     * -----BEGIN CERTIFICATE-----
+     * MIIGGTCCBcCgAwIBAgIQMqz1AmaFXNCYqtqJu8OU2jAKBggqhkjOPQQDAjCBkjEL
+     * MAkGA1UEBhMCR0IxGzAZBgNVBAgTEkdyZWF0ZXIgTWFuY2hlc3RlcjEQMA4GA1UE
+     * BxMHU2FsZm9yZDEaMBgGA1UEChMRQ09NT0RPIENBIExpbWl0ZWQxODA2BgNVBAMT
+     * L0NPTU9ETyBFQ0MgRG9tYWluIFZhbGlkYXRpb24gU2VjdXJlIFNlcnZlciBDQSAy
+     * MB4XDTE1MTExMzAwMDAwMFoXDTE2MDUwNzIzNTk1OVowazEhMB8GA1UECxMYRG9t
+     * YWluIENvbnRyb2wgVmFsaWRhdGVkMSEwHwYDVQQLExhQb3NpdGl2ZVNTTCBNdWx0
+     * aS1Eb21haW4xIzAhBgNVBAMTGnNuaTMzMjgwLmNsb3VkZmxhcmVzc2wuY29tMFkw
+     * EwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE/VVyjyzoogarRb9sqmpqwwAf+Kh69I9E
+     * 5NeT/1s9nVjvEzYTnrEN3xqNrzbA/y61AbJ6Yy714OCq1ViAmBuCPaOCBBwwggQY
+     * MB8GA1UdIwQYMBaAFEAJYWfwvINxT94SCCxv1NQrdj2WMB0GA1UdDgQWBBT1uV7H
+     * fwV8Ca9MxjAiSHOEyE9EVDAOBgNVHQ8BAf8EBAMCB4AwDAYDVR0TAQH/BAIwADAd
+     * BgNVHSUEFjAUBggrBgEFBQcDAQYIKwYBBQUHAwIwTwYDVR0gBEgwRjA6BgsrBgEE
+     * AbIxAQICBzArMCkGCCsGAQUFBwIBFh1odHRwczovL3NlY3VyZS5jb21vZG8uY29t
+     * L0NQUzAIBgZngQwBAgEwVgYDVR0fBE8wTTBLoEmgR4ZFaHR0cDovL2NybC5jb21v
+     * ZG9jYTQuY29tL0NPTU9ET0VDQ0RvbWFpblZhbGlkYXRpb25TZWN1cmVTZXJ2ZXJD
+     * QTIuY3JsMIGIBggrBgEFBQcBAQR8MHowUQYIKwYBBQUHMAKGRWh0dHA6Ly9jcnQu
+     * Y29tb2RvY2E0LmNvbS9DT01PRE9FQ0NEb21haW5WYWxpZGF0aW9uU2VjdXJlU2Vy
+     * dmVyQ0EyLmNydDAlBggrBgEFBQcwAYYZaHR0cDovL29jc3AuY29tb2RvY2E0LmNv
+     * bTCCAmMGA1UdEQSCAlowggJWghpzbmkzMzI4MC5jbG91ZGZsYXJlc3NsLmNvbYIT
+     * Ki4xMDAxY29ja3RhaWxzLmNvbYIRKi4xMDAxbW90ZXVycy5jb22CEiouYWxpZml0
+     * emdlcmFsZC5tZYINKi5hbGlrZml0ei5tZYINKi5ib3J1dC5wYXJ0eYINKi5lbGth
+     * c3NhLmNvbYIIKi5mcmQubW6CGyouZy1hbmQtYy1lbGVjdHJvbmljcy5jby51a4IJ
+     * Ki5naGFjLmRlgg4qLmtub3R0Ym95cy5ldYIaKi5tb250Z29tZXJ5dm9jYWxjb2Fj
+     * aC5jb22CDioubW96YWlrLmNvLmlkggsqLm1vemFpay5pZIIWKi5wZXJzb25hbGl6
+     * YXJibG9nLmNvbYIUKi5zd2FnZG9nd2Fsa2luZy5jb22CGSoudGhlZ29sZGVuYW5k
+     * Y29tcGFueS5jb22CETEwMDFjb2NrdGFpbHMuY29tgg8xMDAxbW90ZXVycy5jb22C
+     * EGFsaWZpdHpnZXJhbGQubWWCC2FsaWtmaXR6Lm1lggtib3J1dC5wYXJ0eYILZWxr
+     * YXNzYS5jb22CBmZyZC5tboIZZy1hbmQtYy1lbGVjdHJvbmljcy5jby51a4IHZ2hh
+     * Yy5kZYIMa25vdHRib3lzLmV1ghhtb250Z29tZXJ5dm9jYWxjb2FjaC5jb22CDG1v
+     * emFpay5jby5pZIIJbW96YWlrLmlkghRwZXJzb25hbGl6YXJibG9nLmNvbYISc3dh
+     * Z2RvZ3dhbGtpbmcuY29tghd0aGVnb2xkZW5hbmRjb21wYW55LmNvbTAKBggqhkjO
+     * PQQDAgNHADBEAiBTlTYFkE9plIJhPMbOC95KAnpOw2UrOLSzmL/laTanoQIgCSLp
+     * 9AhIYFMZOdUkCVLEWFgCuDpd1p4MlvszlJBdcgQ=
+     * -----END CERTIFICATE-----
+     */
+  }
+});
+
 ```
 
 ## Contributing
