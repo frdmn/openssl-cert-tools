@@ -1,3 +1,21 @@
+<a name="1.1.0"></a>
+# 1.1.0 (2015-11-17)
+
+* Add docu for new getCertificate() ([29db653](https://github.com/frdmn/openssl-cert-tools/commit/29db653))
+* Add info for each error code ([3a2831b](https://github.com/frdmn/openssl-cert-tools/commit/3a2831b))
+* Add new function to get remote certificate ([0eaad84](https://github.com/frdmn/openssl-cert-tools/commit/0eaad84))
+* Catch stderr for possible errors during connect ([34d0f23](https://github.com/frdmn/openssl-cert-tools/commit/34d0f23))
+* Get rid of version in README.md ([f9f5c3e](https://github.com/frdmn/openssl-cert-tools/commit/f9f5c3e))
+* Implement timout in case of errors ([9df4fab](https://github.com/frdmn/openssl-cert-tools/commit/9df4fab))
+* Improve error handling ([a804db1](https://github.com/frdmn/openssl-cert-tools/commit/a804db1))
+* Increase timeout for running tests ([d8faa1d](https://github.com/frdmn/openssl-cert-tools/commit/d8faa1d))
+* Test cases for new getCertificate function ([690fa95](https://github.com/frdmn/openssl-cert-tools/commit/690fa95))
+* Trim error output ([7da7581](https://github.com/frdmn/openssl-cert-tools/commit/7da7581))
+* Try catch while searching for certificate ([ad710b0](https://github.com/frdmn/openssl-cert-tools/commit/ad710b0))
+* Update header ([dc0be07](https://github.com/frdmn/openssl-cert-tools/commit/dc0be07))
+* Use openssl binary in $PATH ([6456445](https://github.com/frdmn/openssl-cert-tools/commit/6456445))
+* Version bump to 1.1.0 ([524c157](https://github.com/frdmn/openssl-cert-tools/commit/524c157))
+
 <a name="1.0.2"></a>
 # 1.0.2 (2015-10-19)
 
