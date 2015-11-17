@@ -1,3 +1,9 @@
+<a name="1.1.1"></a>
+# 1.1.1 (2015-11-17)
+
+* Update test case ([b37638b](https://github.com/frdmn/openssl-cert-tools/commit/b37638b))
+* Version bump to 1.1.1 ([75b0df5](https://github.com/frdmn/openssl-cert-tools/commit/75b0df5))
+
 <a name="1.1.0"></a>
 # 1.1.0 (2015-11-17)
 
