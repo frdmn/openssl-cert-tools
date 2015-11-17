@@ -1,3 +1,9 @@
+<a name="1.2.0"></a>
+# 1.2.0 (2015-11-17)
+
+* Actually calculate remaining days instead of certifice duration ([2216c68](https://github.com/frdmn/openssl-cert-tools/commit/2216c68))
+* Version bump to 1.2.0 ([99b18e6](https://github.com/frdmn/openssl-cert-tools/commit/99b18e6))
+
 <a name="1.1.1"></a>
 # 1.1.1 (2015-11-17)
 
