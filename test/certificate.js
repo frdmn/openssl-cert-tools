@@ -47,7 +47,7 @@ describe('openssl-cert-tools test cases', function() {
       });
     });
 
-    it('should return errorno=49 because port doesn\'t exist)', function(done) {
+    it('should return errorno=49 because port doesn\'t exist', function(done) {
       opensslTools.getCertificate('localhost', '65536', function(err, crt){
         if (err) {
           expect(err.toString()).to.contains('connect:errno=49');
