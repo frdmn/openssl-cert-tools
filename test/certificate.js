@@ -47,10 +47,10 @@ describe('openssl-cert-tools test cases', function() {
       });
     });
 
-    it('should return "Can\'t assign requested address" error, because port doesn\'t exist', function(done) {
+    it('should return error, because the port 65536 doesn\'t exist', function(done) {
       opensslTools.getCertificate('localhost', '65536', function(err, crt){
         if (err) {
-          expect(err.toString()).to.contains('Can\'t assign requested address');
+          expect(err.toString()).to.contains('Error');
           done();
         } else {
           console.log(crt);
