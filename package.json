@@ -4,7 +4,7 @@
   "description": "Module to handle certificate related OpenSSL commands",
   "main": "main.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec"
+    "test": "./node_modules/.bin/mocha --reporter spec --timeout 10000"
   },
   "repository": {
     "type": "git",
