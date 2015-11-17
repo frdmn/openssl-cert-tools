@@ -47,10 +47,10 @@ describe('openssl-cert-tools test cases', function() {
       });
     });
 
-    it('should return errorno=49 because port doesn\'t exist', function(done) {
+    it('should return error, because the port 65536 doesn\'t exist', function(done) {
       opensslTools.getCertificate('localhost', '65536', function(err, crt){
         if (err) {
-          expect(err.toString()).to.contains('connect:errno=49');
+          expect(err.toString()).to.contains('Error');
           done();
         } else {
           console.log(crt);
@@ -58,7 +58,7 @@ describe('openssl-cert-tools test cases', function() {
       });
     });
 
-    it('should run into timeout because no HTTPS on news.ycombinator.com:444', function(done) {
+    it('should run into timeout, because no HTTPS on news.ycombinator.com:444', function(done) {
       opensslTools.getCertificate('news.ycombinator.com', '444', function(err, crt){
         if (err) {
           expect(err.toString()).to.contains('Time out while trying to extract');
