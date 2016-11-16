@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/frdmn/openssl-cert-tools#readme",
   "devDependencies": {
-    "chai": "^3.3.0",
-    "mocha": "^2.3.3"
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2"
   }
 }
