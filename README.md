@@ -122,7 +122,7 @@ opensslTools.getCertificateRequestInfo(demoCertificate, function(err, data){
   }
 });
 
-test.getCertificate('frd.mn', '443', function(err, crt){
+opensslTools.getCertificate('frd.mn', '443', function(err, crt){
   if (!err) {
     console.log(crt);
     /* =>
@@ -181,7 +181,7 @@ test.getCertificate('frd.mn', '443', function(err, crt){
 
 ## Credits
 
-* @[es128](https://github.com/es128/) for the [ssl-utils](https://github.com/es128/ssl-utils/) Node module:  
+* @[es128](https://github.com/es128/) for the [ssl-utils](https://github.com/es128/ssl-utils/) Node module:
 https://github.com/es128/ssl-utils/
 
 ## License
