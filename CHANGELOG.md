@@ -1,3 +1,9 @@
+<a name="1.3.1"></a>
+# 1.3.1 (2018-11-28)
+
+- Update dependencies
+- Fix "remainingDays" response when certificate is already expired
+
 <a name="1.3.0"></a>
 # 1.3.0 (2018-07-11)
 
