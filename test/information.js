@@ -96,7 +96,7 @@ describe('openssl-cert-tools test cases', function() {
           console.error(err);
         } else {
           expect(data.subject).to.deep.equal({
-            OU: 'PositiveSSL Multi-Domain',
+            OU: 'Domain Control Validated',
             CN: 'sni33280.cloudflaressl.com'
           });
           done();
