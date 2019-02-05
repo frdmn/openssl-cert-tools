@@ -1,3 +1,9 @@
+<a name="1.3.3"></a>
+# 1.3.3 (2019-02-05)
+
+- Fix test cases
+- Update subject CN of remote hostname in test case
+
 <a name="1.3.2"></a>
 # 1.3.2 (2019-02-05)
 
