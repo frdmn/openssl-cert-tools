@@ -1,3 +1,10 @@
+<a name="1.3.4"></a>
+# 1.3.4 (2020-05-20)
+
+- Fix test cases
+- Fix vulnarability reports
+- Allow subjects and issuers without whitespaces (fixes [#11](https://github.com/frdmn/openssl-cert-tools/issues/11))
+
 <a name="1.3.3"></a>
 # 1.3.3 (2019-02-05)
 
