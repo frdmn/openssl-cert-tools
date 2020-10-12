@@ -165,6 +165,39 @@ opensslTools.getCertificate('frd.mn', '443', function(err, crt){
   }
 });
 
+opensslTools.getCertificateChain('frd.mn', '443', function(err, crt){
+  if (!err) {
+    console.log(crt);
+    /* =>
+     * [
+     *   {
+     *     's:/C=US/ST=California/L=San Francisco/O=Y Combinator, Inc./CN=news.ycombinator.com':
+     *       '-----BEGIN CERTIFICATE-----\n' +
+     *       'MIIGqzCCBZOgAwIBAgIQB0/pAsa31hmIThyhhU2ReDANBgkqhkiG9w0BAQsFADBN\n' +
+     *       '...' +
+     *       'WeNYP84Yjw6OFSHdi2W0VojRGhxm7PZCMqswN/XaBg==\n' +
+     *       '-----END CERTIFICATE-----'
+     *   },
+     *   {
+     *     's:/C=US/O=DigiCert Inc/CN=DigiCert SHA2 Secure Server CA':
+     *       '-----BEGIN CERTIFICATE-----\n' +
+     *       'MIIElDCCA3ygAwIBAgIQAf2j627KdciIQ4tyS8+8kTANBgkqhkiG9w0BAQsFADBh\n' +
+     *       '...' +
+     *       'j6tJLp07kzQoH3jOlOrHvdPJbRzeXDLz\n' +
+     *       '-----END CERTIFICATE-----'
+     *   },
+     *   {
+     *     's:/C=US/O=DigiCert Inc/OU=www.digicert.com/CN=DigiCert Global Root CA':
+     *       '-----BEGIN CERTIFICATE-----\n' +
+     *       'MIIDrzCCApegAwIBAgIQCDvgVpBCRrGhdWrJWZHHSjANBgkqhkiG9w0BAQUFADBh\n' +
+     *       '...' +
+     *       'CAUw7C29C79Fv1C5qfPrmAESrciIxpg0X40KPMbp1ZWVbd4=\n' +
+     *       '-----END CERTIFICATE-----'
+     *   }
+     * ]
+     */
+  }
+});
 ```
 
 ## Contributing
