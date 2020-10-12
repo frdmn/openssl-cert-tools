@@ -39,6 +39,8 @@ var testCertificate =
 '/j9A\n' +
 '-----END CERTIFICATE-----';
 
+var expectedCertificateHash = 'e30fbb5ba0cecaad7a2d0cb836584c05';
+
 var testCertificateRequest =
 '-----BEGIN CERTIFICATE REQUEST-----\n' +
 'MIIC+jCCAeICAQAwgbQxCzAJBgNVBAYTAkRFMRAwDgYDVQQIDAdCYXZhcmlhMRMw\n' +
@@ -136,5 +138,16 @@ describe('openssl-cert-tools test cases', function() {
       });
     });
   });
-
+  describe('getCertificateHash', function() {
+    it('should return the appropriate MD5 hash', function(done) {
+      opensslTools.getCertificateHash(testCertificate, function(err, data){
+        if (err) {
+          console.error(err);
+        } else {
+          expect(data).to.equal(expectedCertificateHash);
+          done();
+         }
+      });
+    });
+  });
 });

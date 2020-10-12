@@ -198,6 +198,15 @@ opensslTools.getCertificateChain('frd.mn', '443', function(err, crt){
      */
   }
 });
+
+opensslTools.getCertificateHash(demoCertificate, function(err, hash){
+  if (!err) {
+    console.log(hash);
+    /* =>
+     * e30fbb5ba0cecaad7a2d0cb836584c05
+     */
+  }
+});
 ```
 
 ## Contributing
