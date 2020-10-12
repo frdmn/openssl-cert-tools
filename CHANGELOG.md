@@ -1,3 +1,8 @@
+<a name="1.4.1"></a>
+# 1.4.1 (2020-10-12)
+
+- Improve response from getCertificateChain()
+
 <a name="1.4.0"></a>
 # 1.4.0 (2020-10-12)
 
