@@ -61,6 +61,7 @@ var testCertificateRequest =
 '3UcTESfcIv3XuKeLXKQEJZtR3PQlWDb+pI7x1iUm7k0Q1KXsYysdUzq/fGTSdw==\n' +
 '-----END CERTIFICATE REQUEST-----';
 
+var expectedCertificateRequestHash = 'dbc530fbb1e60b5cf43cc9c7f8dcc1ad';
 
 describe('openssl-cert-tools test cases', function() {
   describe('getCertificateInfo', function() {
@@ -145,6 +146,18 @@ describe('openssl-cert-tools test cases', function() {
           console.error(err);
         } else {
           expect(data).to.equal(expectedCertificateHash);
+          done();
+         }
+      });
+    });
+  });
+  describe('getCertificateRequestHash', function() {
+    it('should return the appropriate MD5 hash', function(done) {
+      opensslTools.getCertificateRequestHash(testCertificateRequest, function(err, data){
+        if (err) {
+          console.error(err);
+        } else {
+          expect(data).to.equal(expectedCertificateRequestHash);
           done();
          }
       });

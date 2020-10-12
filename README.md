@@ -207,6 +207,15 @@ opensslTools.getCertificateHash(demoCertificate, function(err, hash){
      */
   }
 });
+
+opensslTools.getCertificateRequestHash(demoCertificateRequest, function(err, hash){
+  if (!err) {
+    console.log(hash);
+    /* =>
+     * dbc530fbb1e60b5cf43cc9c7f8dcc1ad
+     */
+  }
+});
 ```
 
 ## Contributing
