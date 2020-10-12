@@ -1,3 +1,11 @@
+<a name="1.4.0"></a>
+# 1.4.0 (2020-10-12)
+
+- Fix test cases (test against Node 8 and 12)
+- Fix vulnarability report
+- New feature: receive complete intermediate chain from remote host
+- New feature: functions to receive hashes of certificates, requests and keys (closes [#5](https://github.com/frdmn/openssl-cert-tools/issues/5))
+
 <a name="1.3.4"></a>
 # 1.3.4 (2020-05-20)
 
