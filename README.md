@@ -4,6 +4,14 @@
 
 NodeJS module to handle TLS certificates using OpenSSL.
 
+- [`getCertificateInfo()`](#getcertificateinfo)
+- [`getCertificateRequestInfo()`](#getcertificaterequestinfo)
+- [`getCertificate()`](#getcertificate)
+- [`getCertificateChain()`](#getcertificatechain)
+- [`getCertificateHash()`](#getcertificatehash)
+- [`getCertificateRequestHash()`](#getcertificaterequesthash)
+- [`getPrivateKeyHash()`](#getprivatekeyhash)
+
 ## Installation
 
 ```shell
@@ -12,6 +20,8 @@ npm install openssl-cert-tools
 ```
 
 ## Usage
+
+### `getCertificateInfo()`
 
 ```javascript
 var opensslTools = require('openssl-cert-tools');
@@ -45,7 +55,7 @@ var demoCertificate =
 'Ki5wZXJzb25hbGl6YXJibG9nLmNvbYIUKi5zd2FnZG9nd2Fsa2luZy5jb22CGSou\n' +
 'dGhlZ29sZGVuYW5kY29tcGFueS5jb22CETEwMDFjb2NrdGFpbHMuY29tgg8xMDAx\n' +
 'bW90ZXVycy5jb22CEGFsaWZpdHpnZXJhbGQubWWCC2FsaWtmaXR6Lm1lggtib3J1\n' +
-'dC5wYXJ0eYILZWxrYXNzYS5jb22CBmZyZC5tboIZZy1hbmQtYy1lbGVjdHJvbmljv\n' +
+'dC5wYXJ0eYILZWxrYXNzYS5jb22CBmZyZC5tboIZZy1hbmQtYy1lbGVjdHJvbmlj\n' +
 'cy5jby51a4IHZ2hhYy5kZYIMa25vdHRib3lzLmV1ghhtb250Z29tZXJ5dm9jYWxj\n' +
 'b2FjaC5jb22CDG1vemFpay5jby5pZIIJbW96YWlrLmlkgghuZXdlci5jY4IUcGVy\n' +
 'c29uYWxpemFyYmxvZy5jb22CEnN3YWdkb2d3YWxraW5nLmNvbYIXdGhlZ29sZGVu\n' +
@@ -80,7 +90,11 @@ opensslTools.getCertificateInfo(demoCertificate, function(err, data){
      */
   }
 });
+```
 
+### `getCertificateRequestInfo()`
+
+```javascript
 var demoCertificateRequest =
 '-----BEGIN CERTIFICATE REQUEST-----\n' +
 'MIIC+jCCAeICAQAwgbQxCzAJBgNVBAYTAkRFMRAwDgYDVQQIDAdCYXZhcmlhMRMw\n' +
@@ -121,7 +135,11 @@ opensslTools.getCertificateRequestInfo(demoCertificate, function(err, data){
      */
   }
 });
+```
 
+### `getCertificate()`
+
+```javascript
 opensslTools.getCertificate('frd.mn', '443', function(err, crt){
   if (!err) {
     console.log(crt);
@@ -164,7 +182,11 @@ opensslTools.getCertificate('frd.mn', '443', function(err, crt){
      */
   }
 });
+```
 
+### `getCertificateChain()`
+
+```javascript
 opensslTools.getCertificateChain('frd.mn', '443', function(err, crt){
   if (!err) {
     console.log(crt);
@@ -195,6 +217,98 @@ opensslTools.getCertificateChain('frd.mn', '443', function(err, crt){
      *       '-----END CERTIFICATE-----'
      *   }
      * ]
+     */
+  }
+});
+```
+
+### `getCertificateHash()`
+
+```javascript
+opensslTools.getCertificateHash(demoCertificate, function(err, hash){
+  if (!err) {
+    console.log(hash);
+    /* =>
+     * e30fbb5ba0cecaad7a2d0cb836584c05
+     */
+  }
+});
+```
+
+### `getCertificateRequestHash()`
+
+```javascript
+opensslTools.getCertificateRequestHash(demoCertificateRequest, function(err, hash){
+  if (!err) {
+    console.log(hash);
+    /* =>
+     * dbc530fbb1e60b5cf43cc9c7f8dcc1ad
+     */
+  }
+});
+```
+
+### `getPrivateKeyHash()`
+
+```
+var demoPrivateKey =
+'-----BEGIN RSA PRIVATE KEY-----\n' +
+'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\n' +
+'-----END RSA PRIVATE KEY-----\n';
+
+opensslTools.getPrivateKeyHash(demoCertificateRequest, function(err, hash){
+  if (!err) {
+    console.log(hash);
+    /* =>
+     * 0b47baa451ba0d99eda2ca44dc4bd000
      */
   }
 });
