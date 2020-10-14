@@ -1,3 +1,8 @@
+<a name="1.4.2"></a>
+# 1.4.2 (2020-10-14)
+
+- Initialize empty string stdout/stderr variables (fixes [#17](https://github.com/frdmn/openssl-cert-tools/issues/17))
+
 <a name="1.4.1"></a>
 # 1.4.1 (2020-10-12)
 
