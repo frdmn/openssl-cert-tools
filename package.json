@@ -18,6 +18,6 @@
   "homepage": "https://github.com/frdmn/openssl-cert-tools#readme",
   "devDependencies": {
     "chai": "^4.2.0",
-    "mocha": "^7.1.2"
+    "mocha": "^10.2.0"
   }
 }
