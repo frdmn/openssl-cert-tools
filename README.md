@@ -60,6 +60,14 @@ console.log(info);
 For expired certificates, `remainingDays` is `0` and the additional
 `expiredDays` property reports how long ago the certificate expired.
 
+Two behaviors worth knowing:
+
+- `certificate` echoes the input exactly as it was passed in (a `Buffer`
+  in, a `Buffer` out; a string in, a string out).
+- `issuer`/`subject` are plain objects keyed by DN component. If a
+  component appears more than once (e.g. two `OU=` entries), the last
+  occurrence wins.
+
 Distinguished names are parsed from the RFC2253 representation, so values
 containing escaped commas or equals signs (e.g. `O=Foo\, Inc.`) are handled
 correctly.

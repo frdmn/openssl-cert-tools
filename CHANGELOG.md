@@ -11,6 +11,9 @@ Breaking rewrite with OpenSSL 3.x support:
 - Validate host/port arguments up front
 - New `{ timeout }` option for `getCertificate()` and `getCertificateChain()` (replaces the fixed 5 second limit)
 - Include OpenSSL stderr in extraction errors instead of silently returning nothing on unrecognized connection errors
+- Friendlier error message when the `openssl` binary is not available in `$PATH`
+- Add TypeScript type definitions (`index.d.ts`)
+- Add `keywords` and an `exports` map to package.json
 - Replace mocha/chai with Node's built-in test runner and run tests against a local TLS server with committed fixtures (no network access required, opt-in live test behind `RUN_NETWORK_TESTS=1`)
 - Replace jshint/jscs with ESLint, replace Travis CI with GitHub Actions (Linux/macOS, Node 18-24)
 - Require Node.js >= 18
