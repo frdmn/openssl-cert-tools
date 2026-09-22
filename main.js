@@ -1,4 +1,3 @@
-/* jshint node: true */
 'use strict';
 
 /*
@@ -13,11 +12,7 @@
  * LICENSE file for more information. All Rights Reserved.
  */
 
-[
-	require('./lib/certificate'),
-	require('./lib/information')
-].forEach(function (module) {
-	Object.keys(module).forEach(function (key) {
-		exports[key] = module[key];
-	});
-});
+module.exports = {
+  ...require('./lib/certificate'),
+  ...require('./lib/information')
+};
