@@ -4,8 +4,19 @@
   "description": "Module to handle certificate related OpenSSL commands",
   "main": "main.js",
   "scripts": {
+    "lint": "eslint .",
     "test": "node --test test/"
   },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "lib",
+    "main.js",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/frdmn/openssl-cert-tools.git"
@@ -15,5 +26,10 @@
   "bugs": {
     "url": "https://github.com/frdmn/openssl-cert-tools/issues"
   },
-  "homepage": "https://github.com/frdmn/openssl-cert-tools#readme"
+  "homepage": "https://github.com/frdmn/openssl-cert-tools#readme",
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.11.0",
+    "globals": "^17.12.0"
+  }
 }
