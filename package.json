@@ -4,7 +4,7 @@
   "description": "Module to handle certificate related OpenSSL commands",
   "main": "main.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec --timeout 10000"
+    "test": "node --test test/"
   },
   "repository": {
     "type": "git",
@@ -15,9 +15,5 @@
   "bugs": {
     "url": "https://github.com/frdmn/openssl-cert-tools/issues"
   },
-  "homepage": "https://github.com/frdmn/openssl-cert-tools#readme",
-  "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^7.1.2"
-  }
+  "homepage": "https://github.com/frdmn/openssl-cert-tools#readme"
 }
