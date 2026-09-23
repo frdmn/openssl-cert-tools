@@ -21,6 +21,7 @@ const rootCert = read('root-cert.pem');
 const ecCert = read('ec-cert.pem');
 const ecCsr = read('ec-csr.pem');
 const ecKey = read('ec-key.pem');
+const sanEdgeCert = read('san-edge-cert.pem');
 
 // Ground truth computed with:
 //   openssl x509|req|rsa -noout -modulus ... | openssl dgst -<algorithm>
@@ -85,6 +86,44 @@ test('getCertificateInfo reports expired days for expired certificates', async (
 
 test('getCertificateInfo rejects invalid input', async () => {
   await assert.rejects(() => opensslTools.getCertificateInfo('not a certificate'), /certificate/i);
+});
+
+test('getCertificateInfo parses the subjectAltName extension', async () => {
+  const info = await opensslTools.getCertificateInfo(serverCert);
+
+  assert.deepStrictEqual(info.subjectAltName, {
+    DNS: ['localhost'],
+    'IP Address': ['127.0.0.1']
+  });
+});
+
+test('getCertificateInfo groups repeated SAN entry types into arrays', async () => {
+  const info = await opensslTools.getCertificateInfo(legacyCert);
+
+  assert.ok(Array.isArray(info.subjectAltName.DNS));
+  assert.ok(info.subjectAltName.DNS.length > 30);
+  assert.ok(info.subjectAltName.DNS.includes('sni33280.cloudflaressl.com'));
+  assert.ok(info.subjectAltName.DNS.includes('frd.mn'));
+  assert.ok(info.subjectAltName.DNS.includes('*.frd.mn'));
+});
+
+test('getCertificateInfo omits subjectAltName for certificates without the extension', async () => {
+  const info = await opensslTools.getCertificateInfo(ecCert);
+  assert.strictEqual(info.subjectAltName, undefined);
+});
+
+test('getCertificateInfo handles SAN values containing commas', async () => {
+  const info = await opensslTools.getCertificateInfo(sanEdgeCert);
+
+  assert.deepStrictEqual(info.subjectAltName, {
+    DNS: ['san-edge.example', '*.san-edge.example'],
+    email: ['foo,bar@san-edge.example'],
+    // The second URI contains ", " itself, which the parser must glue
+    // back together; IPv6 addresses are printed in normalized form
+    URI: ['https://san-edge.example/a,b', 'https://san-edge.example/x, y'],
+    'IP Address': ['192.168.0.1', '0:0:0:0:0:0:0:1'],
+    'Registered ID': ['1.2.3.4']
+  });
 });
 
 test('getCertificateRequestInfo parses the subject', async () => {

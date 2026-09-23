@@ -1,0 +1,25 @@
+# Self-signed certificate exercising subjectAltName parsing:
+# multiple entries per type, wildcards, values containing commas
+# (including ", " which the parser must glue back together) and
+# non-DNS entry types. Used by test/information.test.js.
+
+[req]
+distinguished_name = dn
+prompt = no
+x509_extensions = ext
+
+[dn]
+CN = san-edge.example
+
+[ext]
+subjectAltName = @alt
+
+[alt]
+DNS.1 = san-edge.example
+DNS.2 = *.san-edge.example
+email.1 = "foo,bar@san-edge.example"
+URI.1 = "https://san-edge.example/a,b"
+URI.2 = "https://san-edge.example/x, y"
+IP.1 = 192.168.0.1
+IP.2 = ::1
+RID.1 = 1.2.3.4
