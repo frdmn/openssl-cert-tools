@@ -174,7 +174,10 @@ test('getPublicKeyHash rejects unknown kinds', async () => {
 });
 
 test('getPublicKeyHash rejects inputs that do not match the kind', async () => {
-  await assert.rejects(() => opensslTools.getPublicKeyHash(serverCert, 'key'), /private key/i);
+  // openssl's stderr wording differs between builds ("Could not read key"
+  // vs "Could not find private key"), so only match on the common "key"
+  await assert.rejects(() => opensslTools.getPublicKeyHash(serverCert, 'key'), /key/i);
+  await assert.rejects(() => opensslTools.getPublicKeyHash(serverKey, 'certificate'), /certificate/i);
 });
 
 test('missing openssl binary produces a friendly error', () => {
