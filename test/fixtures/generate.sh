@@ -42,4 +42,11 @@ openssl x509 -req -in ec-csr.pem \
   -CA intermediate-cert.pem -CAkey intermediate-key.pem -CAcreateserial -days 3650 \
   -out ec-cert.pem
 
-rm -f intermediate.csr root-cert.srl intermediate-cert.srl
+# Self-signed certificate exercising subjectAltName parsing (see
+# san-edge.cnf for the covered cases). Only the certificate is
+# committed; the key is discarded in the cleanup below.
+openssl req -x509 -newkey rsa:2048 -nodes -days 3650 \
+  -keyout san-edge-key.pem -out san-edge-cert.pem \
+  -config san-edge.cnf
+
+rm -f intermediate.csr root-cert.srl intermediate-cert.srl san-edge-key.pem

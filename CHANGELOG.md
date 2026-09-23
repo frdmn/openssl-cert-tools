@@ -2,6 +2,7 @@
 # Unreleased
 
 - New `getPublicKeyHash(input, kind, options)` hashing the Subject Public Key Info (SPKI) of certificates, requests and private keys; unlike the modulus based hash functions it works for any key algorithm (RSA, EC, Ed25519, ...)
+- New `subjectAltName` property in `getCertificateInfo()` output, grouping the SAN entries by type (`DNS`, `IP Address`, `email`, ...) (closes #24)
 - Test fixtures now include an EC (prime256v1) certificate/CSR/key trio
 
 <a name="2.0.0"></a>
