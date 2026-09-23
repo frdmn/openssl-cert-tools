@@ -9,7 +9,7 @@
  * Type definitions for openssl-cert-tools
  */
 
-/** Digest algorithm used to hash a modulus */
+/** Digest algorithm used by the hash functions */
 export type HashAlgorithm = 'md5' | 'sha1' | 'sha256' | 'sha512';
 
 /** Options for remote certificate lookups */
@@ -18,7 +18,7 @@ export interface SslTargetOptions {
   timeout?: number;
 }
 
-/** Options for the modulus hash functions */
+/** Options for the hash functions */
 export interface HashOptions {
   /** Digest algorithm. Default: 'sha256' */
   algorithm?: HashAlgorithm;
@@ -73,3 +73,14 @@ export function getCertificateRequestHash(certificateRequest: string | Buffer, o
 
 /** Hash the modulus of a private key (SHA-256 by default) */
 export function getPrivateKeyHash(privateKey: string | Buffer, options?: HashOptions): Promise<string>;
+
+/** Input type accepted by getPublicKeyHash */
+export type PublicKeyHashKind = 'certificate' | 'request' | 'key';
+
+/**
+ * Hash the Subject Public Key Info (SPKI) of the public key inside a
+ * certificate, certificate signing request or private key (SHA-256 by
+ * default). Inputs from the same keypair produce the same hash, for any
+ * key algorithm (RSA, EC, Ed25519, ...).
+ */
+export function getPublicKeyHash(input: string | Buffer, kind: PublicKeyHashKind, options?: HashOptions): Promise<string>;
