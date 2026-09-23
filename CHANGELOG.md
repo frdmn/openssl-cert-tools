@@ -1,3 +1,23 @@
+<a name="2.0.0"></a>
+# 2.0.0 (2026-09-23)
+
+Breaking rewrite with OpenSSL 3.x support:
+
+- **Breaking**: all functions return Promises instead of taking callbacks
+- **Breaking**: hash functions (`getCertificateHash`, `getCertificateRequestHash`, `getPrivateKeyHash`) default to SHA-256 instead of MD5; `md5`, `sha1` and `sha512` are available via `{ algorithm }` option
+- Fix chain and certificate extraction from `openssl s_client` output on OpenSSL 3.x (PEM blocks are parsed directly instead of relying on the changed `s:`/`i:` metadata lines)
+- Fix mangled hash output on OpenSSL 3.x (`MD5(stdin)=` prefix handling)
+- Parse issuer/subject DNs with RFC2253 escape handling, values containing commas or equals signs (e.g. `O=Foo, Inc.`) no longer break parsing
+- Validate host/port arguments up front
+- New `{ timeout }` option for `getCertificate()` and `getCertificateChain()` (replaces the fixed 5 second limit)
+- Include OpenSSL stderr in extraction errors instead of silently returning nothing on unrecognized connection errors
+- Friendlier error message when the `openssl` binary is not available in `$PATH`
+- Add TypeScript type definitions (`index.d.ts`)
+- Add `keywords` and an `exports` map to package.json
+- Replace mocha/chai with Node's built-in test runner and run tests against a local TLS server with committed fixtures (no network access required, opt-in live test behind `RUN_NETWORK_TESTS=1`)
+- Replace jshint/jscs with ESLint, replace Travis CI with GitHub Actions (Linux/macOS, Node 18-24)
+- Require Node.js >= 18
+
 <a name="1.4.3"></a>
 # 1.4.3 (2020-10-14)
 

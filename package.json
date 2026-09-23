@@ -1,11 +1,41 @@
 {
   "name": "openssl-cert-tools",
-  "version": "1.4.3",
+  "version": "2.0.0",
   "description": "Module to handle certificate related OpenSSL commands",
+  "keywords": [
+    "openssl",
+    "certificate",
+    "x509",
+    "csr",
+    "tls",
+    "ssl",
+    "pem",
+    "modulus",
+    "public-key"
+  ],
   "main": "main.js",
-  "scripts": {
-    "test": "./node_modules/.bin/mocha --reporter spec --timeout 10000"
+  "types": "index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./main.js"
+    }
   },
+  "scripts": {
+    "lint": "eslint .",
+    "test": "node --test test/*.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "files": [
+    "lib",
+    "main.js",
+    "index.d.ts",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/frdmn/openssl-cert-tools.git"
@@ -17,7 +47,8 @@
   },
   "homepage": "https://github.com/frdmn/openssl-cert-tools#readme",
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^7.1.2"
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.11.0",
+    "globals": "^17.12.0"
   }
 }
