@@ -31,7 +31,7 @@ const opensslTools = require('openssl-cert-tools');
 ### `getCertificateInfo()`
 
 Decodes a PEM encoded certificate (string or `Buffer`) into its issuer,
-subject and validity dates:
+subject, validity dates and subjectAltName extension:
 
 ```javascript
 const fs = require('fs');
@@ -51,6 +51,9 @@ console.log(info);
  *   subject: {
  *     CN: 'frd.mn'
  *   },
+ *   subjectAltName: {
+ *     DNS: ['frd.mn', 'www.frd.mn']
+ *   },
  *   validFrom: 2026-06-17T00:00:00.000Z,
  *   validTo: 2026-12-16T00:00:00.000Z,
  *   remainingDays: 84
@@ -61,17 +64,22 @@ console.log(info);
 For expired certificates, `remainingDays` is `0` and the additional
 `expiredDays` property reports how long ago the certificate expired.
 
-Two behaviors worth knowing:
+Behaviors worth knowing:
 
 - `certificate` echoes the input exactly as it was passed in (a `Buffer`
   in, a `Buffer` out; a string in, a string out).
 - `issuer`/`subject` are plain objects keyed by DN component. If a
   component appears more than once (e.g. two `OU=` entries), the last
   occurrence wins.
+- `subjectAltName` groups the SAN entries by type (`DNS`, `IP Address`,
+  `email`, `URI`, `Registered ID`, ...), each type mapping to an array
+  of values. It is absent when the certificate carries no SAN extension.
+  To check whether a hostname is covered, look it up in
+  `subjectAltName.DNS`.
 
 Distinguished names are parsed from the RFC2253 representation, so values
 containing escaped commas or equals signs (e.g. `O=Foo\, Inc.`) are handled
-correctly.
+correctly. SAN values containing commas (e.g. URIs) are preserved as well.
 
 ### `getCertificateRequestInfo()`
 
