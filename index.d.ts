@@ -32,6 +32,15 @@ export interface DistinguishedName {
   [component: string]: string;
 }
 
+/**
+ * Subject Alternative Name entries grouped by type, e.g.
+ * `{ DNS: ['example.com', '*.example.com'], 'IP Address': ['127.0.0.1'] }`.
+ * Absent when the certificate has no subjectAltName extension.
+ */
+export interface SubjectAltName {
+  [type: string]: string[];
+}
+
 /** Information decoded from a certificate */
 export interface CertificateInfo {
   /** The input certificate, echoed as given (string or Buffer) */
@@ -44,6 +53,8 @@ export interface CertificateInfo {
   remainingDays: number;
   /** Days since the certificate expired; only present for expired certificates */
   expiredDays?: number;
+  /** subjectAltName extension entries; absent when the certificate has none */
+  subjectAltName?: SubjectAltName;
 }
 
 /** Information decoded from a certificate signing request */
