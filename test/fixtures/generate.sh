@@ -32,4 +32,14 @@ openssl x509 -req -in server.csr \
   -CA intermediate-cert.pem -CAkey intermediate-key.pem -CAcreateserial -days 3650 \
   -extfile server.ext -out server-cert.pem
 
+# EC certificate/CSR/key trio (prime256v1) from a single keypair,
+# signed by the intermediate. Exercises the SPKI based public key
+# hash for non-RSA keys, where the modulus hash functions fail.
+openssl genpkey -algorithm EC -pkeyopt ec_paramgen_curve:P-256 -out ec-key.pem
+openssl req -new -key ec-key.pem -out ec-csr.pem \
+  -subj '/C=DE/O=openssl-cert-tools/CN=localhost EC'
+openssl x509 -req -in ec-csr.pem \
+  -CA intermediate-cert.pem -CAkey intermediate-key.pem -CAcreateserial -days 3650 \
+  -out ec-cert.pem
+
 rm -f intermediate.csr root-cert.srl intermediate-cert.srl

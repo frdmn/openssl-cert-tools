@@ -11,6 +11,7 @@ Node.js module to handle TLS certificates using OpenSSL.
 - [`getCertificateHash()`](#getcertificatehash)
 - [`getCertificateRequestHash()`](#getcertificaterequesthash)
 - [`getPrivateKeyHash()`](#getprivatekeyhash)
+- [`getPublicKeyHash()`](#getpublickeyhash)
 
 ## Installation
 
@@ -169,6 +170,32 @@ Same as `getCertificateHash()`, but for private keys:
 ```javascript
 await opensslTools.getPrivateKeyHash(demoPrivateKey);
 // => '0583b0f265569ec7b472c587e7704a78462a53a518949df979e921b5feb255f3'
+```
+
+### `getPublicKeyHash()`
+
+Returns the hash of the Subject Public Key Info (SPKI) of the public key
+inside a certificate, certificate signing request or private key. Matching
+inputs produce the same hash, for any key algorithm (RSA, EC, Ed25519, ...)
+— unlike the modulus hash functions above, which only work for RSA. Pass
+the input type as the second argument:
+
+```javascript
+await opensslTools.getPublicKeyHash(demoCertificate, 'certificate');
+await opensslTools.getPublicKeyHash(demoCertificateRequest, 'request');
+await opensslTools.getPublicKeyHash(demoPrivateKey, 'key');
+// All three resolve to the same hash for inputs of the same keypair
+// => 'f552ba4d11bd5a9c2f8827d9e09995315ceff096606dead756afca5d351853ea'
+```
+
+Supported kinds: `certificate`, `request` and `key`; supported algorithms:
+`md5`, `sha1`, `sha256` (default) and `sha512`.
+
+The result is identical to hashing the DER encoded public key with openssl
+itself, so you can cross-check it by hand:
+
+```shell
+openssl pkey -in key.pem -pubout -outform DER | openssl dgst -sha256
 ```
 
 ## Migrating from 1.x

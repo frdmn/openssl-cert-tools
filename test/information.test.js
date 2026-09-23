@@ -17,6 +17,10 @@ const serverKey = read('server-key.pem');
 const legacyCert = read('legacy-cert.pem');
 const legacyCsr = read('legacy-csr.pem');
 const legacyKey = read('legacy-key.pem');
+const rootCert = read('root-cert.pem');
+const ecCert = read('ec-cert.pem');
+const ecCsr = read('ec-csr.pem');
+const ecKey = read('ec-key.pem');
 
 // Ground truth computed with:
 //   openssl x509|req|rsa -noout -modulus ... | openssl dgst -<algorithm>
@@ -27,6 +31,12 @@ const LEGACY_CERT_MD5 = 'baf59ff7f5b05fde6799439b6f31a290';
 const LEGACY_CSR_MD5 = 'dbc530fbb1e60b5cf43cc9c7f8dcc1ad';
 const LEGACY_KEY_MD5 = '0b47baa451ba0d99eda2ca44dc4bd000';
 const LEGACY_KEY_SHA256 = '0583b0f265569ec7b472c587e7704a78462a53a518949df979e921b5feb255f3';
+
+// Ground truth computed with:
+//   openssl pkey -in <key> -pubout -outform DER | openssl dgst -<algorithm>
+const SERVER_SPKI_SHA256 = 'f552ba4d11bd5a9c2f8827d9e09995315ceff096606dead756afca5d351853ea';
+const SERVER_SPKI_MD5 = '3187d33c616e1d614f5731da7abcc501';
+const EC_SPKI_SHA256 = '360ac4249da45292e84f0fc52f4928ad4aaf955fdee6a1efeeec0f5df523362b';
 
 test('getCertificateInfo parses issuer, subject and dates', async () => {
   const info = await opensslTools.getCertificateInfo(serverCert);
@@ -126,6 +136,48 @@ test('sha1 and sha512 algorithms work', async () => {
 
 test('unsupported hash algorithms are rejected', async () => {
   await assert.rejects(() => opensslTools.getCertificateHash(serverCert, { algorithm: 'rot13' }), /Unsupported hash algorithm/);
+});
+
+test('getPublicKeyHash matches across certificate, CSR and key for RSA inputs', async () => {
+  assert.strictEqual(await opensslTools.getPublicKeyHash(serverCert, 'certificate'), SERVER_SPKI_SHA256);
+  assert.strictEqual(await opensslTools.getPublicKeyHash(serverCsr, 'request'), SERVER_SPKI_SHA256);
+  assert.strictEqual(await opensslTools.getPublicKeyHash(serverKey, 'key'), SERVER_SPKI_SHA256);
+});
+
+test('getPublicKeyHash matches across certificate, CSR and key for EC inputs', async () => {
+  const certHash = await opensslTools.getPublicKeyHash(ecCert, 'certificate');
+  assert.strictEqual(certHash, EC_SPKI_SHA256);
+  assert.strictEqual(await opensslTools.getPublicKeyHash(ecCsr, 'request'), certHash);
+  assert.strictEqual(await opensslTools.getPublicKeyHash(ecKey, 'key'), certHash);
+});
+
+test('getPublicKeyHash differs between different keypairs', async () => {
+  const rootHash = await opensslTools.getPublicKeyHash(rootCert, 'certificate');
+  assert.notStrictEqual(rootHash, SERVER_SPKI_SHA256);
+});
+
+test('getPublicKeyHash defaults to 64 lowercase hex characters', async () => {
+  assert.match(await opensslTools.getPublicKeyHash(ecKey, 'key'), /^[0-9a-f]{64}$/);
+});
+
+test('getPublicKeyHash supports md5', async () => {
+  assert.strictEqual(await opensslTools.getPublicKeyHash(serverKey, 'key', { algorithm: 'md5' }), SERVER_SPKI_MD5);
+  assert.match(await opensslTools.getPublicKeyHash(ecKey, 'key', { algorithm: 'md5' }), /^[0-9a-f]{32}$/);
+});
+
+test('getPublicKeyHash rejects unsupported hash algorithms', async () => {
+  await assert.rejects(() => opensslTools.getPublicKeyHash(serverCert, 'certificate', { algorithm: 'rot13' }), /Unsupported hash algorithm/);
+});
+
+test('getPublicKeyHash rejects unknown kinds', async () => {
+  await assert.rejects(() => opensslTools.getPublicKeyHash(serverCert, 'crt'), /Unsupported input kind/);
+});
+
+test('getPublicKeyHash rejects inputs that do not match the kind', async () => {
+  // openssl's stderr wording differs between builds ("Could not read key"
+  // vs "Could not find private key"), so only match on the common "key"
+  await assert.rejects(() => opensslTools.getPublicKeyHash(serverCert, 'key'), /key/i);
+  await assert.rejects(() => opensslTools.getPublicKeyHash(serverKey, 'certificate'), /certificate/i);
 });
 
 test('missing openssl binary produces a friendly error', () => {
