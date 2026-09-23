@@ -1,5 +1,5 @@
-<a name="unreleased"></a>
-# Unreleased
+<a name="2.1.0"></a>
+# 2.1.0 (2026-09-24)
 
 - New `getPublicKeyHash(input, kind, options)` hashing the Subject Public Key Info (SPKI) of certificates, requests and private keys; unlike the modulus based hash functions it works for any key algorithm (RSA, EC, Ed25519, ...)
 - New `subjectAltName` property in `getCertificateInfo()` output, grouping the SAN entries by type (`DNS`, `IP Address`, `email`, ...) (closes #24)
